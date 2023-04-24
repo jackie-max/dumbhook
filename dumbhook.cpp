@@ -8,9 +8,9 @@
 #include "pch.h"
 
 typedef struct _LSA_UNICODE_STRING {
-    USHORT Length;          // длина строки в байтах
-    USHORT MaximumLength;   // размер буфера в байтах
-    PWSTR  Buffer;          // указатель на буфер
+    USHORT Length;         
+    USHORT MaximumLength;   
+    PWSTR  Buffer;         
 } LSA_UNICODE_STRING, * PLSA_UNICODE_STRING;
 
 typedef struct _LSA_OBJECT_ATTRIBUTES {
@@ -18,18 +18,18 @@ typedef struct _LSA_OBJECT_ATTRIBUTES {
     HANDLE RootDirectory;
     PLSA_UNICODE_STRING ObjectName;
     ULONG Attributes;
-    PVOID SecurityDescriptor;        // Points to type SECURITY_DESCRIPTOR
-    PVOID SecurityQualityOfService;  // Points to type SECURITY_QUALITY_OF_SERVICE
+    PVOID SecurityDescriptor;        
+    PVOID SecurityQualityOfService; 
 } LSA_OBJECT_ATTRIBUTES, * PLSA_OBJECT_ATTRIBUTES;
 
 typedef LONG NTSTATUS, * PNTSTATUS;
 typedef PVOID LSA_HANDLE, * PLSA_HANDLE;
 
 NTSTATUS LsaOpenPolicy(
-    PLSA_UNICODE_STRING SystemName,          // имя компьютера
-    PLSA_OBJECT_ATTRIBUTES ObjectAttributes, // атрибуты
-    ACCESS_MASK DesiredAccess,               // права доступа
-    PLSA_HANDLE PolicyHandle                // хэндл объекта политики
+    PLSA_UNICODE_STRING SystemName,        
+    PLSA_OBJECT_ATTRIBUTES ObjectAttributes, 
+    ACCESS_MASK DesiredAccess,              
+    PLSA_HANDLE PolicyHandle               
 );
 
 NTSTATUS(WINAPI* TrueLsaOpenPolicy)(PLSA_UNICODE_STRING SystemName, PLSA_OBJECT_ATTRIBUTES ObjectAttributes, ACCESS_MASK DesiredAccess, PLSA_HANDLE PolicyHandle) = LsaOpenPolicy;
